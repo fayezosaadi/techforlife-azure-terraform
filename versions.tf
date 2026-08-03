@@ -1,0 +1,22 @@
+terraform {
+  required_version = ">= 1.7.5"
+
+  backend "azurerm" {
+    resource_group_name  = "rg-terraform-prd1"
+    storage_account_name = "sttfstateprd1"
+    container_name       = "shared"
+    key                  = "shared-infra.tfstate"
+    use_oidc             = true
+  }
+
+  required_providers {
+    azurerm = {
+      source  = "hashicorp/azurerm"
+      version = "~> 4.37"
+    }
+    azuread = {
+      source  = "hashicorp/azuread"
+      version = "3.6.0"
+    }
+  }
+}
