@@ -8,16 +8,16 @@ resource "azurerm_user_assigned_identity" "rw_identity" {
   location            = azurerm_resource_group.identities.location
 }
 
-# Credential 1: Environment = production
+# Credential: Environment = production
 resource "azurerm_federated_identity_credential" "rw_env_production" {
-  for_each = toset(var.repositories)
+  for_each = var.repositories
 
-  name                      = "github-rw-${each.key}-env-production"
+  name                      = "github-rw-${each.key}-env-prod-imm"
   audience                  = ["api://AzureADTokenExchange"]
   issuer                    = "https://token.actions.githubusercontent.com"
   user_assigned_identity_id = azurerm_user_assigned_identity.rw_identity.id
 
-  subject = "repo:${var.github_org}/${each.key}:environment:production"
+  subject = "repo:${var.github_org}@${var.github_org_id}/${each.key}@${each.value}:environment:production"
 }
 
 # ==========================================
@@ -30,28 +30,28 @@ resource "azurerm_user_assigned_identity" "ro_identity" {
   resource_group_name = azurerm_resource_group.identities.name
 }
 
-# Credential 1: Pull Request
+# Credential: Pull Request
 resource "azurerm_federated_identity_credential" "ro_pull_request" {
-  for_each = toset(var.repositories)
+  for_each = var.repositories
 
-  name                      = "github-ro-${each.key}-pull-request"
+  name                      = "github-ro-${each.key}-pr-imm"
   audience                  = ["api://AzureADTokenExchange"]
   issuer                    = "https://token.actions.githubusercontent.com"
   user_assigned_identity_id = azurerm_user_assigned_identity.ro_identity.id
 
-  subject = "repo:${var.github_org}/${each.key}:pull_request"
+  subject = "repo:${var.github_org}@${var.github_org_id}/${each.key}@${each.value}:pull_request"
 }
 
-# Credential 2: Branch = main
+# Credential: Branch = main
 resource "azurerm_federated_identity_credential" "ro_main_branch" {
-  for_each = toset(var.repositories)
+  for_each = var.repositories
 
-  name                      = "github-ro-${each.key}-branch-main"
+  name                      = "github-ro-${each.key}-main-imm"
   audience                  = ["api://AzureADTokenExchange"]
   issuer                    = "https://token.actions.githubusercontent.com"
   user_assigned_identity_id = azurerm_user_assigned_identity.ro_identity.id
 
-  subject = "repo:${var.github_org}/${each.key}:ref:refs/heads/main"
+  subject = "repo:${var.github_org}@${var.github_org_id}/${each.key}@${each.value}:ref:refs/heads/main"
 }
 
 # ==========================================
