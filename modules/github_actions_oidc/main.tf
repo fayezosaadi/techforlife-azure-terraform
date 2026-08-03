@@ -12,7 +12,7 @@ resource "azurerm_user_assigned_identity" "rw_identity" {
 resource "azurerm_federated_identity_credential" "rw_env_production" {
   for_each = var.repositories
 
-  name                      = "github-rw-${each.key}-env-prod-imm"
+  name                      = "github-rw-${each.key}-env-prod"
   audience                  = ["api://AzureADTokenExchange"]
   issuer                    = "https://token.actions.githubusercontent.com"
   user_assigned_identity_id = azurerm_user_assigned_identity.rw_identity.id
@@ -34,7 +34,7 @@ resource "azurerm_user_assigned_identity" "ro_identity" {
 resource "azurerm_federated_identity_credential" "ro_pull_request" {
   for_each = var.repositories
 
-  name                      = "github-ro-${each.key}-pr-imm"
+  name                      = "github-ro-${each.key}-pr"
   audience                  = ["api://AzureADTokenExchange"]
   issuer                    = "https://token.actions.githubusercontent.com"
   user_assigned_identity_id = azurerm_user_assigned_identity.ro_identity.id
@@ -46,7 +46,7 @@ resource "azurerm_federated_identity_credential" "ro_pull_request" {
 resource "azurerm_federated_identity_credential" "ro_main_branch" {
   for_each = var.repositories
 
-  name                      = "github-ro-${each.key}-main-imm"
+  name                      = "github-ro-${each.key}-main"
   audience                  = ["api://AzureADTokenExchange"]
   issuer                    = "https://token.actions.githubusercontent.com"
   user_assigned_identity_id = azurerm_user_assigned_identity.ro_identity.id
