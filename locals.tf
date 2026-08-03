@@ -1,6 +1,7 @@
 locals {
   environment_map = {
-    "prod" = "prd"
+    "prod"    = "prd"
+    "default" = "prd"
   }
 
   network_identity = {
