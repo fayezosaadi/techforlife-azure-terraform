@@ -4,10 +4,18 @@ variable "github_org" {
   default     = "fayezosaadi"
 }
 
+variable "github_org_id" {
+  type        = string
+  description = "The numeric ID of the GitHub organization"
+  default     = "26156279"
+}
+
 variable "repositories" {
-  description = "List of GitHub repositories"
-  type        = list(string)
-  default     = ["techforlife-azure-terraform"]
+  type        = map(string)
+  description = "A map of repository names to their numeric GitHub repository IDs"
+  default = {
+    "techforlife-azure-terraform" = "1320398734"
+  }
 }
 
 variable "location" {
