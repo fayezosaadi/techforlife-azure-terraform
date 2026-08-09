@@ -18,6 +18,8 @@ locals {
   tf_storage_account_name = "sttfstate${local.name_suffix}"
 
   # shared
-  shared_rg_name  = "rg-${local.workspace}-${local.name_suffix}"
-  shared_acr_name = "cr${local.workspace}${local.name_suffix}"
+  shared_rg_name            = "rg-${local.workspace}-${local.name_suffix}"
+  shared_acr_name           = "cr${local.workspace}${local.name_suffix}"
+  shared_log_workspace_name = "logworkspace-${local.workspace}-${local.name_suffix}"
+  shared_app_insights_name  = "appinsights-${local.workspace}-${local.name_suffix}"
 }

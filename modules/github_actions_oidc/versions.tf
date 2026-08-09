@@ -1,14 +1,6 @@
 terraform {
   required_version = ">= 1.7.5"
 
-  backend "azurerm" {
-    resource_group_name  = "rg-terraform-prd1"
-    storage_account_name = "sttfstateprd1"
-    container_name       = "github"
-    key                  = "github-actions-oidc.tfstate"
-    use_oidc             = true
-  }
-
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
