@@ -17,7 +17,7 @@ resource "azurerm_federated_identity_credential" "rw_env_production" {
   issuer                    = "https://token.actions.githubusercontent.com"
   user_assigned_identity_id = azurerm_user_assigned_identity.rw_identity.id
 
-  subject = "repo:${var.github_org}@${var.github_org_id}/${each.key}@${each.value}:environment:production"
+  subject = "repo:${var.github_org}/${each.key}:environment:production"
 }
 
 # ==========================================
@@ -39,7 +39,7 @@ resource "azurerm_federated_identity_credential" "ro_pull_request" {
   issuer                    = "https://token.actions.githubusercontent.com"
   user_assigned_identity_id = azurerm_user_assigned_identity.ro_identity.id
 
-  subject = "repo:${var.github_org}@${var.github_org_id}/${each.key}@${each.value}:pull_request"
+  subject = "repo:${var.github_org}/${each.key}:pull_request"
 }
 
 # Credential: Branch = main
@@ -51,7 +51,7 @@ resource "azurerm_federated_identity_credential" "ro_main_branch" {
   issuer                    = "https://token.actions.githubusercontent.com"
   user_assigned_identity_id = azurerm_user_assigned_identity.ro_identity.id
 
-  subject = "repo:${var.github_org}@${var.github_org_id}/${each.key}@${each.value}:ref:refs/heads/main"
+  subject = "repo:${var.github_org}/${each.key}:ref:refs/heads/main"
 }
 
 # ==========================================
