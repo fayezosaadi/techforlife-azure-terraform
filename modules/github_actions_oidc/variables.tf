@@ -14,7 +14,8 @@ variable "repositories" {
   type        = map(string)
   description = "A map of repository names to their numeric GitHub repository IDs"
   default = {
-    "techforlife-azure-terraform" = "1320398734"
+    "techforlife-azure-terraform"       = "1320398734"
+    "foundry-ai-chatapp-infrastructure" = "1285215945"
   }
 }
 
