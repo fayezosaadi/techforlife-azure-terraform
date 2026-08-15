@@ -1,7 +1,13 @@
-output "github_actions_readonly_identities" {
-  value = module.github_actions_oidc.ro_identity
+output "gha_pr_main" {
+  value = {
+    "primary_tenant"  = module.github_actions_primary_tenant.gha_ro
+    "external_tenant" = module.github_actions_external_tenant.gha_ro
+  }
 }
 
-output "github_actions_production_identities" {
-  value = module.github_actions_oidc.rw_identity
+output "gha_prod_env" {
+  value = {
+    "primary_tenant"  = module.github_actions_primary_tenant.gha_rw
+    "external_tenant" = module.github_actions_external_tenant.gha_rw
+  }
 }

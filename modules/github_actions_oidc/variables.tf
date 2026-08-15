@@ -1,41 +1,40 @@
-variable "github_org" {
-  description = "GitHub organization name"
-  type        = string
-  default     = "fayezosaadi"
-}
-
-variable "github_org_id" {
-  type        = string
-  description = "The numeric ID of the GitHub organization"
-  default     = "26156279"
-}
-
 variable "repositories" {
-  type        = map(string)
-  description = "A map of repository names to their numeric GitHub repository IDs"
-  default = {
-    "techforlife-azure-terraform"       = "1320398734"
-    "foundry-ai-chatapp-infrastructure" = "1285215945"
-  }
+  type = map(object({
+    id = string
+    org = object({
+      id   = string
+      name = string
+    })
+  }))
+  description = "A list of repository names"
 }
 
-variable "location" {
-  description = "The Azure region to deploy resources in"
-  type        = string
-  default     = "eastus"
+variable "readonly_role_assignments" {
+  type = map(object({
+    role_name = string
+    scope     = string
+  }))
+
+  default = {}
 }
 
-variable "subscription_id" {
-  description = "Azure subscription id"
-  type        = string
+variable "readwrite_role_assignments" {
+  type = map(object({
+    role_name = string
+    scope     = string
+  }))
+
+  default = {}
 }
 
-variable "storage_id" {
-  description = "Azure storage id"
-  type        = string
+variable "grant_msgraph_readonly_application_permissions" {
+  description = "When true, grants the read-only identity the Microsoft Graph Application.Read.All application permission with admin consent, so it can read Entra app registrations during 'terraform plan' (e.g. state refresh of azuread_application resources)."
+  type        = bool
+  default     = false
 }
 
-variable "tags" {
-  description = "Tags to apply to all resources"
-  type        = map(string)
+variable "grant_msgraph_readwrite_application_permissions" {
+  description = "When true, grants the read-write identity the Microsoft Graph Application.ReadWrite.OwnedBy application permission with admin consent, so it can create/manage Entra app registrations (e.g. via azuread_application resources)."
+  type        = bool
+  default     = false
 }

@@ -1,15 +1,11 @@
-output "rw_identity" {
+output "gha_ro" {
   value = {
-    client_id       = azurerm_user_assigned_identity.rw_identity.client_id
-    tenant_id       = azurerm_user_assigned_identity.rw_identity.tenant_id
-    subscription_id = var.subscription_id
+    client_id = azuread_application_registration.github_actions_readonly.client_id
   }
 }
 
-output "ro_identity" {
+output "gha_rw" {
   value = {
-    client_id       = azurerm_user_assigned_identity.ro_identity.client_id
-    tenant_id       = azurerm_user_assigned_identity.ro_identity.tenant_id
-    subscription_id = var.subscription_id
+    client_id = azuread_application_registration.github_actions_readwrite.client_id
   }
 }
