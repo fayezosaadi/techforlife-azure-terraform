@@ -66,17 +66,13 @@ resource "azurerm_role_assignment" "readwrite" {
 }
 
 resource "azuread_app_role_assignment" "readonly_msgraph" {
-  count = var.grant_msgraph_readonly_application_permissions ? 1 : 0
-
-  app_role_id         = data.azuread_service_principal.msgraph[0].app_role_ids["Application.Read.All"]
+  app_role_id         = data.azuread_service_principal.msgraph.app_role_ids["Application.Read.All"]
   principal_object_id = azuread_service_principal.readonly.object_id
-  resource_object_id  = data.azuread_service_principal.msgraph[0].object_id
+  resource_object_id  = data.azuread_service_principal.msgraph.object_id
 }
 
 resource "azuread_app_role_assignment" "readwrite_msgraph" {
-  count = var.grant_msgraph_readwrite_application_permissions ? 1 : 0
-
-  app_role_id         = data.azuread_service_principal.msgraph[0].app_role_ids["Application.ReadWrite.OwnedBy"]
+  app_role_id         = data.azuread_service_principal.msgraph.app_role_ids["Application.ReadWrite.OwnedBy"]
   principal_object_id = azuread_service_principal.readwrite.object_id
-  resource_object_id  = data.azuread_service_principal.msgraph[0].object_id
+  resource_object_id  = data.azuread_service_principal.msgraph.object_id
 }
