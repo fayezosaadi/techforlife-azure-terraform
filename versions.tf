@@ -1,5 +1,5 @@
 terraform {
-  required_version = ">= 1.7.5"
+  required_version = "~> 1.15.0"
 
   backend "azurerm" {
     resource_group_name  = "rg-terraform-prd1"
@@ -12,11 +12,11 @@ terraform {
   required_providers {
     azurerm = {
       source  = "hashicorp/azurerm"
-      version = "~> 4.37"
+      version = "~> 5.1.0"
     }
     azuread = {
       source  = "hashicorp/azuread"
-      version = "3.6.0"
+      version = "~> 3.9.0"
     }
   }
 }
