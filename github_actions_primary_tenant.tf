@@ -38,5 +38,9 @@ module "github_actions_primary_tenant" {
       role_name = "Contributor"
       scope     = data.azurerm_subscription.current.id
     }
+    "subscription_user_access_administrator" = {
+      role_name = "User Access Administrator"
+      scope     = data.azurerm_subscription.current.id
+    }
   }
 }
