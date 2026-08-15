@@ -21,8 +21,4 @@ module "github_actions_external_tenant" {
       }
     }
   }
-
-  grant_msgraph_readonly_application_permissions = true
-
-  grant_msgraph_readwrite_application_permissions = true
 }
